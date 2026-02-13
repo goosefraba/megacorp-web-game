@@ -1,6 +1,7 @@
 # Megacorp Web Game
 
 ![Megacorp Web Game Screenshot](docs/screenshot.png)
+_Latest in-game screenshot from the current build._
 
 A browser-based strategy/simulation game where you build a global AI megacorp from a single data center into a planetary-scale company.
 
