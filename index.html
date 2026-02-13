@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Megacorp: Planetary Stack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Oxanium:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <main class="game-stage">
+        <canvas id="game-canvas" aria-label="Megacorp world map and simulation"></canvas>
+
+        <section id="menu-overlay" class="overlay visible" aria-live="polite">
+          <h1>Megacorp: Planetary Stack</h1>
+          <p>
+            Start with one data center and build a global AI empire. Expand across real-world hubs,
+            survive legal and energy shocks, and beat rival megacorps with superior research and strategy.
+          </p>
+          <div class="overlay-actions">
+            <button id="start-btn" class="cta-btn">Start Company</button>
+            <p class="hint">
+              Controls: click map nodes, use panel actions, arrows to cycle map/focus,
+              `A/B/C/D/E/H/K/L/O` for ops, `Enter` to start research, `P` for strategy, `+/-/0` zoom,
+              mouse wheel zoom, drag map to pan, `F` fullscreen.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <aside class="control-panel">
+        <section class="panel-block">
+          <h2>Executive Dashboard</h2>
+          <div class="metrics-grid">
+            <div><span>Funds</span><strong id="funds-value">$0</strong></div>
+            <div><span>Cashflow</span><strong id="cashflow-value">$0/day</strong></div>
+            <div><span>Research</span><strong id="research-rate">0 RP/day</strong></div>
+            <div><span>Data Reserves</span><strong id="data-units">0 PB</strong></div>
+            <div><span>Talent</span><strong id="talent-value">0</strong></div>
+            <div><span>Patents</span><strong id="patent-value">0</strong></div>
+            <div><span>Influence</span><strong id="influence-value">0</strong></div>
+            <div><span>Reputation</span><strong id="reputation-value">0</strong></div>
+            <div><span>Emissions</span><strong id="emissions-value">0 kt</strong></div>
+            <div><span>Model Tier</span><strong id="model-tier">None</strong></div>
+            <div><span>Valuation</span><strong id="valuation">$0</strong></div>
+            <div><span>Risk Level</span><strong id="risk-level">Low</strong></div>
+          </div>
+          <div class="speed-controls">
+            <button data-speed="0">Pause</button>
+            <button data-speed="1" class="active">1x</button>
+            <button data-speed="2">2x</button>
+            <button data-speed="4">4x</button>
+          </div>
+          <p id="date-label" class="date-label">Year 2032, Day 1</p>
+        </section>
+
+        <section class="panel-block">
+          <h2>Strategic Challenges</h2>
+          <div id="agi-goal" class="agi-goal">
+            <div class="goal-topline">
+              <span id="agi-progress-text">AGI Program: 0%</span>
+              <span id="agi-achieved">Not achieved</span>
+            </div>
+            <div class="progress-track"><div id="agi-progress-bar"></div></div>
+          </div>
+          <p id="challenge-status" class="challenge-status">No active enterprise SLA mandates.</p>
+          <div id="challenge-offer" class="challenge-offer"></div>
+          <button id="accept-offer-btn">Accept SLA Offer (O)</button>
+          <div id="challenge-contracts" class="challenge-contracts"></div>
+        </section>
+
+        <section class="panel-block">
+          <h2>World Operations</h2>
+          <p id="location-summary">Select a location on the map.</p>
+          <div class="action-grid">
+            <button id="acquire-btn">Acquire Location</button>
+            <button id="upgrade-dc-btn">Upgrade Data Center</button>
+            <button id="buy-server-btn">Buy Server Cluster</button>
+            <button id="build-lab-btn">Build Research Lab</button>
+            <button id="gather-data-btn">Gather Training Data</button>
+            <button id="recruit-btn">Recruit Talent</button>
+            <button id="patent-btn">File Patent</button>
+            <button id="contract-btn">Sign Enterprise Contract</button>
+            <button id="harden-btn">Harden Site</button>
+            <button id="lobby-btn">Policy Campaign</button>
+          </div>
+          <div id="location-breakdown" class="location-breakdown"></div>
+          <div id="action-intel" class="action-intel"></div>
+        </section>
+
+        <section class="panel-block">
+          <h2>Map View</h2>
+          <div class="map-controls">
+            <button id="zoom-out-btn">Zoom Out</button>
+            <button id="zoom-reset-btn">Reset</button>
+            <button id="zoom-in-btn">Zoom In</button>
+          </div>
+          <p id="zoom-label" class="date-label">Zoom 1.00x</p>
+        </section>
+
+        <section class="panel-block">
+          <h2>Market Focus</h2>
+          <div id="focus-buttons" class="focus-buttons"></div>
+          <div id="market-bars" class="market-bars"></div>
+        </section>
+
+        <section class="panel-block">
+          <h2>AI Model Program</h2>
+          <div id="models-list" class="models-list"></div>
+        </section>
+
+        <section class="panel-block tech-tree">
+          <h2>Research Tree</h2>
+          <div id="research-progress-wrap" class="research-progress-wrap hidden">
+            <div class="progress-header">
+              <span id="researching-name"></span>
+              <span id="researching-time"></span>
+            </div>
+            <div class="progress-track"><div id="research-progress-bar"></div></div>
+          </div>
+          <div id="research-tree" class="research-tree"></div>
+        </section>
+
+        <section class="panel-block tech-tree">
+          <h2>Strategy Tech Tree</h2>
+          <div id="strategy-tree" class="research-tree"></div>
+        </section>
+
+        <section class="panel-block">
+          <h2>Corp Intel Feed</h2>
+          <ul id="event-feed" class="event-feed"></ul>
+        </section>
+      </aside>
+    </div>
+
+    <script type="module" src="./game.js"></script>
+  </body>
+</html>
