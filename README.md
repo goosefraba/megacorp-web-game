@@ -9,6 +9,12 @@ A browser-based strategy/simulation game where you build a global AI megacorp fr
 
 This repository is a **prompt test project for Codex** to evaluate how far Codex can take an iterative web-game build from concept to playable result.
 
+## Collaboration Model
+
+- This repo is intended to be open-source friendly.
+- Contributions should come through pull requests.
+- The `main` branch is protected to keep changes review-based.
+
 ## What You Do In The Game
 
 - Start with one data center and limited resources.
@@ -83,5 +89,4 @@ Then open `http://localhost:5174`.
 
 ## Notes
 
-- `progress.md` contains implementation history and balancing notes.
 - `window.render_game_to_text` and `window.advanceTime(ms)` are exposed for automated testing workflows.
